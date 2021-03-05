@@ -5,7 +5,7 @@
 
 
       <div id="app">
-        <posts></posts>
+         <router-view></router-view>
       </div>
 
 
