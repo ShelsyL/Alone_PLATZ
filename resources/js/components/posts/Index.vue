@@ -45,9 +45,10 @@
 
 <script>
 export default {
-  data () {
-    return {
-      posts: []
+
+  computed: {
+    posts () {
+      return this.$store.getters.getPosts;
     }
   },
   methods: {
@@ -56,8 +57,7 @@ export default {
     }
   },
   created () {
-    axios.get('api/posts')
-    .then(reponsePHP => (this.posts = reponsePHP.data))
+
   }
 }
 </script>
