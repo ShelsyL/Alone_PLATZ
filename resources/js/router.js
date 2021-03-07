@@ -21,5 +21,10 @@ export default new Router({
       name: 'posts.show',
       component: PostsShow
     }
+    //{
+    //  path: '/posts/:categorie',
+    //  name: 'posts.categorie',
+    //  component: PostCategorie
+    //}
   ]
 })

@@ -14,10 +14,11 @@ let getters = {
     }
   },
     // post by categorie Id
-  // getPostsByCategorieId  (state) {
-  //     return function (id) {
-  //     return state.posts.filter(post => categorie.id == id);
-  // }
+//  getPostsByCategorieId  (state) {
+//      return function (id) {
+//      return state.posts.filter(post => categorie.id == id);
+//    }
+//  },
 
   // CATEGORIES
     // All Categorie

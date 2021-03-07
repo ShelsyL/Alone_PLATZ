@@ -1,5 +1,5 @@
 
-// 1. STATE => Propriétés
+// 1. STATE => Propriétés (constructeur)
 let state = {
   // posts initilisé à Null
   posts: []

@@ -2,8 +2,6 @@
   <section class="work">
     <figure v-for="post in posts" :key="post.id" class="white">
       <router-link :to="{name: 'posts.show', params: { id: post.id}}">
-
-
         <!-- <a href="#"> -->
         <img :src="'assets/img/'+ post.image" :alt="post.title" />
         <dl>
