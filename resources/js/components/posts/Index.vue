@@ -48,16 +48,14 @@ export default {
 
   computed: {
     posts () {
+      // Computed pour aller chercher ce getter => getters.getPosts
       return this.$store.getters.getPosts;
     }
   },
-  methods: {
-    log(data){
-      console.log (this.posts);
-    }
-  },
-  created () {
-
-  }
+  // methods: {
+  //   log(data){
+  //     console.log (this.posts);
+  //   }
+  // },
 }
 </script>

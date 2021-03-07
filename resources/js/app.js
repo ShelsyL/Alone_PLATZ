@@ -37,6 +37,7 @@ const app = new Vue({
   el: '#app',
   router, store,
   created () {
+    // On lance le Setter (pour mettre qq chose dans post) pour les posts
     this.$store.dispatch('setPosts');
   }
 });

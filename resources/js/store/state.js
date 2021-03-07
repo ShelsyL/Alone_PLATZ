@@ -1,6 +1,8 @@
-// Propriétés
+
+// 1. STATE => Propriétés
 let state = {
-posts: []
+  // posts initilisé à Null
+  posts: []
 }
 
 export default state

@@ -1893,15 +1893,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   computed: {
     posts: function posts() {
+      // Computed pour aller chercher ce getter => getters.getPosts
       return this.$store.getters.getPosts;
     }
-  },
-  methods: {
-    log: function log(data) {
-      console.log(this.posts);
-    }
-  },
-  created: function created() {}
+  } // methods: {
+  //   log(data){
+  //     console.log (this.posts);
+  //   }
+  // },
+
 });
 
 /***/ }),
@@ -2010,11 +2010,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {};
+  },
+  computed: {
+    post: function post() {
+      var id = this.$route.params.id;
+      return this.$store.getters.getPostById(id);
+    }
   }
 });
 
@@ -2063,6 +2067,7 @@ var app = new Vue({
   router: _router_js__WEBPACK_IMPORTED_MODULE_1__.default,
   store: _store_index_js__WEBPACK_IMPORTED_MODULE_0__.default,
   created: function created() {
+    // On lance le Setter (pour mettre qq chose dans post) pour les posts
     this.$store.dispatch('setPosts');
   }
 });
@@ -2160,18 +2165,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-// Les actions qui vont lancer les setters mais avant ils vont faire les transaction ajax
+// 3. Les actions qui vont lancer les setters mais avant ils vont faire les transaction ajax
 var actions = {
   setPosts: function setPosts(_ref) {
     var commit = _ref.commit;
-    // TRANSACTION AJAX
+    // TRANSACTION AJAX pour lancer le Setter
     axios.get('api/posts') // SET_POSTS avec les informations que l'on doit lui mettre dedans càd data
     .then(function (reponsePHP) {
       return commit('SET_POSTS', reponsePHP.data);
     });
   }
 };
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (actions);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (actions); // Cette action sera lancée dans app.js, dans l'instance de vue de base
+// Dans created, on lance le setter pour les posts
 
 /***/ }),
 
@@ -2188,9 +2194,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 // Getters qui vont permettre d'aller chercher des infos dans le state
 var getters = {
+  // POSTS
+  //  All posts
   getPosts: function getPosts(state) {
     return state.posts;
-  }
+  },
+  // post by id
+  getPostById: function getPostById(state) {
+    return function (id) {
+      return state.posts.find(function (post) {
+        return post.id == id;
+      });
+    };
+  } // post by categorie Id
+  // getPostsByCategorieId  (state) {
+  //     return function (id) {
+  //     return state.posts.filter(post => categorie.id == id);
+  // }
+  // CATEGORIES
+  // All Categorie
+  // getCategories (state) {
+  //   return state.categories;
+  // }
+
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (getters);
 
@@ -2241,9 +2267,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-// Mutateurs càd Setters, qui vont juste modifier
+// 2. Mutateurs càd Setters, qui vont juste modifier
 var mutations = {
   SET_POSTS: function SET_POSTS(state, data) {
+    // Un setter pour mettre qq chose dans posts
     state.posts = data;
   }
 };
@@ -2262,8 +2289,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-// Propriétés
+// 1. STATE => Propriétés
 var state = {
+  // posts initilisé à Null
   posts: []
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (state);
@@ -37827,20 +37855,276 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", {}, [
-    _c("h2", [_vm._v("Détail d'un post ...")]),
+    _vm._m(0),
     _vm._v(" "),
-    _c(
-      "ul",
-      _vm._l(_vm.posts, function(post) {
-        return _c("li", { key: post.id }, [
-          _vm._v("\n      " + _vm._s(post.title) + "\n    ")
-        ])
-      }),
-      0
-    )
+    _c("div", { staticClass: "work" }, [
+      _c("figure", { staticClass: "white" }, [
+        _c("img", {
+          attrs: { src: "assets/img/" + _vm.post.categorie.picto, alt: "" }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "wrapper-text-description" }, [
+        _c("div", { staticClass: "wrapper-file" }, [
+          _c("div", { staticClass: "icon-file" }, [
+            _c("img", {
+              attrs: {
+                src: "assets/img/" + _vm.post.categorie.picto,
+                alt: "",
+                width: "21",
+                height: "21"
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "text-file" }, [_vm._v("Photoshop")])
+        ]),
+        _vm._v(" "),
+        _vm._m(1),
+        _vm._v(" "),
+        _vm._m(2),
+        _vm._v(" "),
+        _vm._m(3),
+        _vm._v(" "),
+        _vm._m(4)
+      ]),
+      _vm._v(" "),
+      _vm._m(5),
+      _vm._v(" "),
+      _vm._m(6),
+      _vm._v(" "),
+      _vm._m(7),
+      _vm._v(" "),
+      _vm._m(8)
+    ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "title-item" }, [
+      _c("div", { staticClass: "title-icon" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "title-text" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "title-text-2" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "wrapper-weight" }, [
+      _c("div", { staticClass: "icon-weight" }, [
+        _c("img", {
+          attrs: {
+            src: "img/icon-weight.svg",
+            alt: "",
+            width: "20",
+            height: "23"
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "text-weight" }, [_vm._v("23 Mo")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "wrapper-desc" }, [
+      _c("div", { staticClass: "icon-desc" }, [
+        _c("img", {
+          attrs: {
+            src: "img/icon-desc.svg",
+            alt: "",
+            width: "24",
+            height: "24"
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "text-desc" }, [
+        _vm._v(
+          "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. "
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "wrapper-download" }, [
+      _c("div", { staticClass: "icon-download" }, [
+        _c("img", {
+          attrs: {
+            src: "img/icon-download.svg",
+            alt: "",
+            width: "19",
+            height: "26"
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "text-download" }, [
+        _c("a", { attrs: { href: "#" } }, [_c("b", [_vm._v("Download")])])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "wrapper-morefrom" }, [
+      _c("div", { staticClass: "text-morefrom" }, [_vm._v("More from .psd")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "image-morefrom" }, [
+        _c("a", { attrs: { href: "#" } }, [
+          _c("div", { staticClass: "image-morefrom-1" }, [
+            _c("img", {
+              attrs: {
+                src: "img/psd-1.jpg",
+                alt: "",
+                width: "430",
+                height: "330"
+              }
+            })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("a", { attrs: { href: "#" } }, [
+          _c("div", { staticClass: "image-morefrom-2" }, [
+            _c("img", {
+              attrs: {
+                src: "img/psd-2.jpg",
+                alt: "",
+                width: "430",
+                height: "330"
+              }
+            })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("a", { attrs: { href: "#" } }, [
+          _c("div", { staticClass: "image-morefrom-3" }, [
+            _c("img", {
+              attrs: {
+                src: "img/psd-3.jpg",
+                alt: "",
+                width: "430",
+                height: "330"
+              }
+            })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("a", { attrs: { href: "#" } }, [
+          _c("div", { staticClass: "image-morefrom-4" }, [
+            _c("img", {
+              attrs: {
+                src: "img/psd-6.jpg",
+                alt: "",
+                width: "430",
+                height: "330"
+              }
+            })
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "post-reply" }, [
+      _c("div", { attrs: { id: "title-post-send" } }, [
+        _c("hr"),
+        _c("h2", [_vm._v("Your comments")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "post-reply" }, [
+      _c("div", { staticClass: "image-reply-post" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "name-reply-post" }, [_vm._v("Igor vlademir")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "text-reply-post" }, [
+        _vm._v(
+          "Awesome mockup, i like it very much ! It will help me for my website i was looking for since few days. Thank you a lot."
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "post-reply-2" }, [
+      _c("div", { staticClass: "image-reply-post-2" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "name-reply-post-2" }, [_vm._v("Nathan Shaw")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "text-reply-post-2" }, [
+        _vm._v("Well done ! I like the way you did it. Awesome ! ")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "post-send" }, [
+      _c("div", { attrs: { id: "main-post-send" } }, [
+        _c("div", { attrs: { id: "title-post-send" } }, [
+          _vm._v("Add your comment")
+        ]),
+        _vm._v(" "),
+        _c(
+          "form",
+          {
+            attrs: {
+              id: "contact",
+              method: "post",
+              action: "/onclickprod/formsubmit_op.asp"
+            }
+          },
+          [
+            _c("fieldset", [
+              _c("p", [
+                _c("textarea", {
+                  attrs: {
+                    id: "message",
+                    name: "message",
+                    maxlength: "500",
+                    placeholder: "Votre Message",
+                    tabindex: "5",
+                    cols: "30",
+                    rows: "4"
+                  }
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticStyle: { "text-align": "center" } }, [
+              _c("input", {
+                attrs: { type: "submit", name: "envoi", value: "Envoyer" }
+              })
+            ])
+          ]
+        )
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 

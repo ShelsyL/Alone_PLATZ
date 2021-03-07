@@ -1,13 +1,11 @@
 <template>
-  <div class="">
-  <h2>Détail d'un post ...</h2>
-  <ul>
-    <li v-for="post in posts" :key="post.id">
-      {{ post.title }}
-    </li>
+  <!-- <div class="">
+  <h2>Mon Détail d'un post ... </h2>
+  <p>{{ post.title }}</p>
+
   </ul>
-</div>
-<!--
+</div> -->
+
 <div class="">
 
   <div class="title-item">
@@ -25,7 +23,7 @@
 
 
       <div class="wrapper-file">
-        <div class="icon-file"><img src="img/icon-psdfile.svg" alt="" width="21" height="21"/></div>
+        <div class="icon-file"><img :src="'assets/img/' + post.categorie.picto" alt="" width="21" height="21"/></div>
         <div class="text-file">Photoshop</div>
       </div>
 
@@ -88,7 +86,7 @@
       </div>
     </div>
   </div>
-</div> -->
+</div>
 
 </template>
 
@@ -96,9 +94,13 @@
 <script>
 export default {
   data () {
-    return {
-
-    }
-  }
-}
+    return {};
+  },
+  computed: {
+    post () {
+     let id = this.$route.params.id;
+      return this.$store.getters.getPostById(id);
+    },
+  },
+};
 </script>
