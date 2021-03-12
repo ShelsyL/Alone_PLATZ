@@ -1879,6 +1879,11 @@ __webpack_require__.r(__webpack_exports__);
       categories: []
     };
   },
+  methods: {
+    test: function test(message) {
+      alert(message);
+    }
+  },
   created: function created() {
     var _this = this;
 
@@ -38639,17 +38644,28 @@ var render = function() {
           "div",
           { key: categorie.id, attrs: { id: "wrapper-bouton-icon" } },
           [
-            _c("div", { attrs: { id: "bouton-ai" } }, [
-              _c("img", {
-                attrs: {
-                  src: "assets/img/" + categorie.picto,
-                  alt: "",
-                  title: "",
-                  height: "28",
-                  width: "28"
+            _c(
+              "div",
+              {
+                attrs: { id: "bouton-theme" },
+                on: {
+                  click: function($event) {
+                    return _vm.test("Coucou")
+                  }
                 }
-              })
-            ])
+              },
+              [
+                _c("img", {
+                  attrs: {
+                    src: "assets/img/" + categorie.picto,
+                    alt: "",
+                    title: "",
+                    height: "28",
+                    width: "28"
+                  }
+                })
+              ]
+            )
           ]
         )
       }),
