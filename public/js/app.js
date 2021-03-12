@@ -1873,32 +1873,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  data: function data() {
-    return {
-      categories: []
-    };
-  },
-  methods: {
-    test: function test(message) {
-      alert(message);
+  computed: {
+    // Affichage des catégories
+    categories: function categories() {
+      return this.$store.getters.getCategories;
     }
-  },
-  created: function created() {
-    var _this = this;
-
-    fetch('api/categories').then(function (reponse1) {
-      return reponse1.json();
-    }).then(function (reponse2) {
-      _this.categories = reponse2;
-    });
-  } // computed: {
-  //   categories () {
-  //     // Computed pour aller chercher ce getter => getters.getCategorie
-  //     return this.$store.getters.getCategories;
-  //   }
-  // },
-
+  }
 });
 
 /***/ }),
@@ -1914,20 +1913,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -2176,7 +2161,8 @@ var app = new Vue({
   store: _store_index_js__WEBPACK_IMPORTED_MODULE_0__.default,
   created: function created() {
     // On lance le Setter (pour mettre qq chose dans post) pour les posts
-    this.$store.dispatch('setPosts'); // this.$store.dispatch('setCategories');
+    this.$store.dispatch('setPosts');
+    this.$store.dispatch('setCategories');
   }
 });
 
@@ -38644,28 +38630,17 @@ var render = function() {
           "div",
           { key: categorie.id, attrs: { id: "wrapper-bouton-icon" } },
           [
-            _c(
-              "div",
-              {
-                attrs: { id: "bouton-theme" },
-                on: {
-                  click: function($event) {
-                    return _vm.test("Coucou")
-                  }
+            _c("div", { attrs: { id: "bouton-theme" } }, [
+              _c("img", {
+                attrs: {
+                  src: "assets/img/" + categorie.picto,
+                  alt: "",
+                  title: "",
+                  height: "28",
+                  width: "28"
                 }
-              },
-              [
-                _c("img", {
-                  attrs: {
-                    src: "assets/img/" + categorie.picto,
-                    alt: "",
-                    title: "",
-                    height: "28",
-                    width: "28"
-                  }
-                })
-              ]
-            )
+              })
+            ])
           ]
         )
       }),
@@ -38784,7 +38759,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "title-text-2" }, [
-        _vm._v(_vm._s(_vm.post.created_at) + " by Onuur")
+        _vm._v(_vm._s(_vm.post.created_at) + " by Onuuur ")
       ])
     ]),
     _vm._v(" "),

@@ -13,7 +13,7 @@
     <img :src="'assets/img/' + post.categorie.picto" alt="" with="68" height="68"/>
 </div>
     <div class="title-text">{{ post.title }}</div>
-    <div class="title-text-2">{{ post.created_at }} by Onuur</div>
+    <div class="title-text-2">{{ post.created_at }} by Onuuur </div>
   </div>
 
 
