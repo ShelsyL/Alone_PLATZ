@@ -23,6 +23,8 @@ window.Vue = require('vue').default;
 
 // Vue.component('posts', require('./components/Posts.vue').default);
 
+Vue.component('menu-categories', require('./components/Menu.vue').default);
+
 
 /**
 * Next, we will create a fresh Vue application instance and attach it to
@@ -39,5 +41,6 @@ const app = new Vue({
   created () {
     // On lance le Setter (pour mettre qq chose dans post) pour les posts
     this.$store.dispatch('setPosts');
+    // this.$store.dispatch('setCategories');
   }
 });

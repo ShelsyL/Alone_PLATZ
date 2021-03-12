@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
-use App\Http\Controllers\Posts;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +25,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 // ]);
 
 // Route::get('/posts/test', [Posts::class, 'test'])->name('posts.test');
-
+use App\Http\Controllers\Posts;
 Route::resource('posts', Posts::class, [
+  'except' => ['show', 'create', 'edit']
+]);
+
+
+use App\Http\Controllers\Categories;
+Route::resource('categories', Categories::class, [
   'except' => ['show', 'create', 'edit']
 ]);

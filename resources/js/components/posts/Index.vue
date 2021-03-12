@@ -1,4 +1,5 @@
 <template>
+
   <section class="work">
     <figure v-for="post in posts" :key="post.id" class="white">
       <router-link :to="{name: 'posts.show', params: { id: post.id}}">
@@ -10,7 +11,7 @@
         </dl>
       </router-link>
       <!-- </a> -->
-
+      
       <div id="wrapper-part-info">
         <div class="part-info-image">
           <img :src="'assets/img/' + post.categorie.picto" alt="" width="28" height="28"/>
@@ -22,6 +23,7 @@
 
     </figure>
   </section>
+
 </template>
 
 

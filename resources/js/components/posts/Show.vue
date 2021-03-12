@@ -9,7 +9,9 @@
 <div class="">
 
   <div class="title-item">
-    <div class="title-icon"></div>
+    <div class="title-icon">
+    <img :src="'assets/img/' + post.categorie.picto" alt="" with="68" height="68"/>
+</div>
     <div class="title-text">{{ post.title }}</div>
     <div class="title-text-2">{{ post.created_at }} by Onuur</div>
   </div>
@@ -17,7 +19,7 @@
 
   <div class="work">
     <figure class="white">
-      <img :src="'assets/img/' + post.categorie.picto" alt="" />
+      <img :src="'assets/img/' + post.image" alt="" />
     </figure>
 
     <div class="wrapper-text-description">
@@ -39,7 +41,7 @@
 
       <div class="wrapper-desc">
         <div class="icon-desc">
-          <img src="img/icon-desc.svg" alt="" width="24" height="24"/>
+          <img <img src="img/icon-desc.svg" alt="" width="24" height="24"/>
         </div>
         <div class="text-desc">
           {{ post.content }}
@@ -62,22 +64,22 @@
         <div class="image-morefrom">
           <a href="#">
             <div class="image-morefrom-1">
-              <img src="img/psd-1.jpg" alt="" width="430" height="330"/>
+              <img :src="'assets/img/' + post.image" alt="" width="430" height="330"/>
             </div>
           </a>
           <a href="#">
             <div class="image-morefrom-2">
-              <img src="img/psd-2.jpg" alt="" width="430" height="330"/>
+              <img :src="'assets/img/' + post.image" alt="" width="430" height="330"/>
             </div>
           </a>
           <a href="#">
             <div class="image-morefrom-3">
-              <img src="img/psd-3.jpg" alt="" width="430" height="330"/>
+              <img :src="'assets/img/' + post.image" alt="" width="430" height="330"/>
             </div>
           </a>
           <a href="#">
             <div class="image-morefrom-4">
-              <img src="img/psd-6.jpg" alt="" width="430" height="330"/>
+              <img :src="'assets/img/' + post.image" alt="" width="430" height="330"/>
             </div>
           </a>
         </div>

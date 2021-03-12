@@ -1,38 +1,53 @@
 <!DOCTYPE HTML>
 <html>
 
-   <head>
-      @include('templates.partials._head')
-   </head>
+<head>
+  @include('templates.partials._head')
+</head>
 
-   <body>
-      <a name="ancre"></a>
-      <!-- CACHE -->
-      <div class="cache"></div>
+<body>
+  <a name="ancre"></a>
+  <!-- CACHE -->
+  <div class="cache"></div>
 
-      @include('templates.partials._header')
+  {{-- APP --}}
+  <div id="app">
 
-      @include('templates.partials._navbar')
+    @include('templates.partials._header')
 
-      @include('templates.partials._filter')
+    <menu-categories></menu-categories>
+    {{-- @include('templates.partials._navbar') --}}
 
-      <!-- PORTFOLIO -->
-      <div id="wrapper-container">
+    @include('templates.partials._filter')
+
+    <!-- PORTFOLIO -->
+    <div id="wrapper-container">
+      <div class="container object">
+        <div id="main-container-image">
 
 
-        @include('templates.partials._zoneDynamique')
 
-         @include('templates.partials._navPrevNext')
+            <router-view></router-view>
 
-         @include('templates.partials._thank')
-
-         @include('templates.partials._footer')
-
-         @include('templates.partials._copyright')
-
+        </div>
       </div>
-      @include('templates.partials._scripts')
 
-      @include('templates.partials._preloader')
-   </body>
+      @include('templates.partials._navPrevNext')
+
+      @include('templates.partials._thank')
+
+      @include('templates.partials._footer')
+
+      @include('templates.partials._copyright')
+
+    </div>
+    @include('templates.partials._scripts')
+
+    @include('templates.partials._preloader')
+
+  </div>
+  {{-- FIN APP --}}
+
+
+</body>
 </html>
