@@ -1,4 +1,9 @@
 <template>
+  <div class="">
+
+
+  <div class="container object">
+    <div id="main-container-image">
 
   <section class="work">
     <figure v-for="post in posts" :key="post.id" class="white">
@@ -24,6 +29,21 @@
     </figure>
   </section>
 
+</div>
+</div>
+
+<div id="wrapper-oldnew">
+   <div class="oldnew">
+      <div class="wrapper-oldnew-prev">
+         <div id="oldnew-prev"></div>
+      </div>
+      <div class="wrapper-oldnew-next">
+         <div id="oldnew-next"></div>
+      </div>
+   </div>
+</div>
+  </div>
+
 </template>
 
 
@@ -37,10 +57,10 @@ export default {
       // Computed pour aller chercher ce getter => getters.getPosts
 
       let idCat = this.$route.params.id;
-      alert(idCat);
+      // alert(idCat);
       if(typeof idCat !== 'undefined'){
-        alert('coucou');
-        console.log(this.$store.getters.getPostsByCategorieId(idCat));
+        // alert('coucou');
+        // console.log(this.$store.getters.getPostsByCategorieId(idCat));
         return this.$store.getters.getPostsByCategorieId(idCat);
       }
       return this.$store.getters.getPosts;

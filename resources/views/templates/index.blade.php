@@ -22,17 +22,12 @@
 
     <!-- PORTFOLIO -->
     <div id="wrapper-container">
-      <div class="container object">
-        <div id="main-container-image">
-
 
 
             <router-view></router-view>
 
-        </div>
-      </div>
 
-      @include('templates.partials._navPrevNext')
+      {{-- @include('templates.partials._navPrevNext') --}}
 
       @include('templates.partials._thank')
 
@@ -45,6 +40,7 @@
 
   </div>
   {{-- FIN APP --}}
+
   @include('templates.partials._scripts')
 
   @include('templates.partials._preloader')
