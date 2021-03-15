@@ -35,7 +35,21 @@ export default {
   computed: {
     posts () {
       // Computed pour aller chercher ce getter => getters.getPosts
+
+      let idCat = this.$route.params.id;
+      alert(idCat);
+      if(typeof idCat !== 'undefined'){
+        alert('coucou');
+        console.log(this.$store.getters.getPostsByCategorieId(idCat));
+        return this.$store.getters.getPostsByCategorieId(idCat);
+      }
       return this.$store.getters.getPosts;
+
+      // let id = this.$route.params.id;
+      // if(!isset(id)){
+      //   return this.$store.getters.getRessourcesByCategorieId(id);
+      // }
+      // return this.$store.getters.getPosts;
     }
   },
   // methods: {

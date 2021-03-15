@@ -41,12 +41,13 @@
       @include('templates.partials._copyright')
 
     </div>
-    @include('templates.partials._scripts')
 
-    @include('templates.partials._preloader')
 
   </div>
   {{-- FIN APP --}}
+  @include('templates.partials._scripts')
+
+  @include('templates.partials._preloader')
 
 
 </body>

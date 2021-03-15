@@ -5,7 +5,7 @@ import Router from 'vue-router'
 // Chargement des composants des différentes routes
 import PostsIndex from './components/posts/Index'
 import PostsShow  from './components/posts/Show'
-// import Categorie  from './components/Categorie'
+import CategoriesShow  from './components/Menu'
 
 // Création du routing
 Vue.use(Router)
@@ -22,10 +22,15 @@ export default new Router({
       name: 'posts.show',
       component: PostsShow
     },
+    {
+     path: '/posts/categories/:id',
+     name: 'categories.show',
+     component: PostsIndex
+    }
     // {
-    //  path: '/posts/:categorie',
-    //  name: 'categorie',
-    //  component: Categorie
+    //  path: '/categories/:id',
+    //  name: 'categories.show',
+    //  component: CategoriesShow
     // }
   ]
 })

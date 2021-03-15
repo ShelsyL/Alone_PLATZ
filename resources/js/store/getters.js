@@ -3,28 +3,34 @@
 let getters = {
 
   // POSTS
-    //  All posts
+  //  All POSTS
   getPosts (state) {
     return state.posts;
   },
-    // post by id
+  // postById
   getPostById (state) {
     return function (id) {
       return state.posts.find(post => post.id == id);
     }
   },
-    // post by categorie Id
- // getPostsByCategorieId  (state) {
- //     return function (id) {
- //     return state.posts.filter(post => categorie.id == id);
- //   }
- // },
-
   // CATEGORIES
-    // All Categorie
-    getCategories (state) {
-      return state.categories;
+  // All Categorie
+  getCategories (state) {
+    return state.categories;
+  },
+  getPostsByCategorieId(state){
+    return function (id) {
+      return state.posts.filter(posts => posts.categorie_id == id);
     }
+  }
+
+  // getPostsByCategorieId  (state) {
+  //     return function (id) {
+  //     return state.posts.filter(posts => post.categorie.id == id);
+  //   }
+  // },
+
+
 };
 
 export default getters;

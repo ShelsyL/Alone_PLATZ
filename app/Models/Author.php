@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Author extends Model
 {
     use HasFactory;
+    protected $table = 'authors';
 
     /**
  * GETTER des posts de la catégorie.

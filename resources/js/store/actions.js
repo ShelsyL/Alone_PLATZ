@@ -7,16 +7,18 @@ let actions = {
     // TRANSACTION AJAX pour lancer le Setter
     axios.get('api/posts')
     // SET_POSTS avec les informations que l'on doit lui mettre dedans càd data
-    .then(reponsePHP => (commit ('SET_POSTS', reponsePHP.data)));
+         .then(reponsePHP => (commit ('SET_POSTS', reponsePHP.data))),
+    axios.get('api/categories')
+         .then(reponsePHP => (commit ('SET_CATEGORIES', reponsePHP.data)));
   },
 
+
   setCategories ({commit}) {
-    // TRANSACTION AJAX pour lancer le Setter
     axios.get('api/categories')
-    // SET_POSTS avec les informations que l'on doit lui mettre dedans càd data
-    .then(reponsePHP => (commit ('SET_CATEGORIES', reponsePHP.data)));
+         .then(reponsePHP => (commit ('SET_CATEGORIES', reponsePHP.data)));
+
   }
-};
+}
 
 export default actions;
 

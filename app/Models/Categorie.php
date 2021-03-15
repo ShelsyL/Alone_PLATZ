@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Categorie extends Model
 {
     use HasFactory;
+    protected $table = 'categories';
 
     /**
  * GETTER des posts de la catégorie.

@@ -1891,11 +1891,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   computed: {
     // Affichage des catégories
     categories: function categories() {
-      return this.$store.getters.getCategories;
+      // let id = this.$route.params.id;
+      return this.$store.getters.getCategories; // return this.$store.getters.getPostsByCategorieId(id);
     }
   }
 });
@@ -1948,7 +1955,20 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     posts: function posts() {
       // Computed pour aller chercher ce getter => getters.getPosts
-      return this.$store.getters.getPosts;
+      var idCat = this.$route.params.id;
+      alert(idCat);
+
+      if (typeof idCat !== 'undefined') {
+        alert('coucou');
+        console.log(this.$store.getters.getPostsByCategorieId(idCat));
+        return this.$store.getters.getPostsByCategorieId(idCat);
+      }
+
+      return this.$store.getters.getPosts; // let id = this.$route.params.id;
+      // if(!isset(id)){
+      //   return this.$store.getters.getRessourcesByCategorieId(id);
+      // }
+      // return this.$store.getters.getPosts;
     }
   } // methods: {
   //   log(data){
@@ -2223,19 +2243,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
 /* harmony import */ var _components_posts_Index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/posts/Index */ "./resources/js/components/posts/Index.vue");
 /* harmony import */ var _components_posts_Show__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/posts/Show */ "./resources/js/components/posts/Show.vue");
+/* harmony import */ var _components_Menu__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/Menu */ "./resources/js/components/Menu.vue");
 
  // Chargement des composants des différentes routes
 
 
- // import Categorie  from './components/Categorie'
-// Création du routing
 
-vue__WEBPACK_IMPORTED_MODULE_2__.default.use(vue_router__WEBPACK_IMPORTED_MODULE_3__.default);
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new vue_router__WEBPACK_IMPORTED_MODULE_3__.default({
+ // Création du routing
+
+vue__WEBPACK_IMPORTED_MODULE_3__.default.use(vue_router__WEBPACK_IMPORTED_MODULE_4__.default);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new vue_router__WEBPACK_IMPORTED_MODULE_4__.default({
   routes: [{
     path: '/',
     name: 'post.index',
@@ -2244,10 +2265,14 @@ vue__WEBPACK_IMPORTED_MODULE_2__.default.use(vue_router__WEBPACK_IMPORTED_MODULE
     path: '/posts/:id',
     name: 'posts.show',
     component: _components_posts_Show__WEBPACK_IMPORTED_MODULE_1__.default
+  }, {
+    path: '/posts/categories/:id',
+    name: 'categories.show',
+    component: _components_posts_Index__WEBPACK_IMPORTED_MODULE_0__.default
   } // {
-  //  path: '/posts/:categorie',
-  //  name: 'categorie',
-  //  component: Categorie
+  //  path: '/categories/:id',
+  //  name: 'categories.show',
+  //  component: CategoriesShow
   // }
   ]
 }));
@@ -2273,13 +2298,13 @@ var actions = {
     axios.get('api/posts') // SET_POSTS avec les informations que l'on doit lui mettre dedans càd data
     .then(function (reponsePHP) {
       return commit('SET_POSTS', reponsePHP.data);
+    }), axios.get('api/categories').then(function (reponsePHP) {
+      return commit('SET_CATEGORIES', reponsePHP.data);
     });
   },
   setCategories: function setCategories(_ref2) {
     var commit = _ref2.commit;
-    // TRANSACTION AJAX pour lancer le Setter
-    axios.get('api/categories') // SET_POSTS avec les informations que l'on doit lui mettre dedans càd data
-    .then(function (reponsePHP) {
+    axios.get('api/categories').then(function (reponsePHP) {
       return commit('SET_CATEGORIES', reponsePHP.data);
     });
   }
@@ -2303,11 +2328,11 @@ __webpack_require__.r(__webpack_exports__);
 // Getters qui vont permettre d'aller chercher des infos dans le state
 var getters = {
   // POSTS
-  //  All posts
+  //  All POSTS
   getPosts: function getPosts(state) {
     return state.posts;
   },
-  // post by id
+  // postById
   getPostById: function getPostById(state) {
     return function (id) {
       return state.posts.find(function (post) {
@@ -2315,17 +2340,23 @@ var getters = {
       });
     };
   },
-  // post by categorie Id
-  // getPostsByCategorieId  (state) {
-  //     return function (id) {
-  //     return state.posts.filter(post => categorie.id == id);
-  //   }
-  // },
   // CATEGORIES
   // All Categorie
   getCategories: function getCategories(state) {
     return state.categories;
-  }
+  },
+  getPostsByCategorieId: function getPostsByCategorieId(state) {
+    return function (id) {
+      return state.posts.filter(function (posts) {
+        return posts.categorie_id == id;
+      });
+    };
+  } // getPostsByCategorieId  (state) {
+  //     return function (id) {
+  //     return state.posts.filter(posts => post.categorie.id == id);
+  //   }
+  // },
+
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (getters);
 
@@ -2383,7 +2414,6 @@ var mutations = {
     state.posts = data;
   },
   SET_CATEGORIES: function SET_CATEGORIES(state, data) {
-    // Un setter pour mettre qq chose dans posts
     state.categories = data;
   }
 };
@@ -38630,18 +38660,29 @@ var render = function() {
           "div",
           { key: categorie.id, attrs: { id: "wrapper-bouton-icon" } },
           [
-            _c("div", { attrs: { id: "bouton-theme" } }, [
-              _c("img", {
+            _c(
+              "router-link",
+              {
                 attrs: {
-                  src: "assets/img/" + categorie.picto,
-                  alt: "",
-                  title: "",
-                  height: "28",
-                  width: "28"
+                  to: { name: "categories.show", params: { id: categorie.id } }
                 }
-              })
-            ])
-          ]
+              },
+              [
+                _c("div", { attrs: { id: "bouton-theme" } }, [
+                  _c("img", {
+                    attrs: {
+                      src: "assets/img/" + categorie.picto,
+                      alt: "",
+                      title: "",
+                      height: "28",
+                      width: "28"
+                    }
+                  })
+                ])
+              ]
+            )
+          ],
+          1
         )
       }),
       0

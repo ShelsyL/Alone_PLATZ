@@ -6,7 +6,6 @@ let mutations = {
     state.posts = data;
   },
   SET_CATEGORIES (state, data) {
-    // Un setter pour mettre qq chose dans posts
     state.categories = data;
   }
 };
