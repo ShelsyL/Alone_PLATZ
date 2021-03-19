@@ -1971,30 +1971,61 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      morePosts: 4
+    };
+  },
+  // methods: {
+  // Our method to GET results from a Laravel endpoint
+  // 	getResults(page = 1) {
+  // 		axios.get('api/posts?page=' + page)
+  // 			.then(response => {
+  // 				this.posts = response.data;
+  // 			});
+  // 	}
+  // },
   computed: {
     posts: function posts() {
       // Computed pour aller chercher ce getter => getters.getPosts
       var idCat = this.$route.params.id; // alert(idCat);
 
-      if (typeof idCat !== 'undefined') {
+      if (typeof idCat !== 'undefined' && idCat !== 1) {
         // alert('coucou');
         // console.log(this.$store.getters.getPostsByCategorieId(idCat));
         return this.$store.getters.getPostsByCategorieId(idCat);
       }
 
-      return this.$store.getters.getPosts; // let id = this.$route.params.id;
-      // if(!isset(id)){
-      //   return this.$store.getters.getRessourcesByCategorieId(id);
-      // }
-      // return this.$store.getters.getPosts;
+      return this.$store.getters.getPosts.slice(0, this.morePosts); // return _.orderBy(this.$store.getters.getPosts.slice(0, this.morePosts), 'created_at', 'DESC') ;
     }
-  } // methods: {
-  //   log(data){
-  //     console.log (this.posts);
-  //   }
-  // },
-
+  }
 });
 
 /***/ }),
@@ -2195,7 +2226,8 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js"
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 // Vue.component('posts', require('./components/Posts.vue').default);
 
-Vue.component('menu-categories', __webpack_require__(/*! ./components/Menu.vue */ "./resources/js/components/Menu.vue").default);
+Vue.component('menu-categories', __webpack_require__(/*! ./components/Menu.vue */ "./resources/js/components/Menu.vue").default); // Vue.component('pagination', require('laravel-vue-pagination'));
+
 /**
 * Next, we will create a fresh Vue application instance and attach it to
 * the page. Then, you may begin adding components to this application
@@ -2299,9 +2331,9 @@ vue__WEBPACK_IMPORTED_MODULE_3__.default.use(vue_router__WEBPACK_IMPORTED_MODULE
     name: 'categories.show',
     component: _components_posts_Index__WEBPACK_IMPORTED_MODULE_0__.default
   } // {
-  //  path: '/categories/:id',
-  //  name: 'categories.show',
-  //  component: CategoriesShow
+  //  path: '/posts/paginate',
+  //  name: 'paginate.show',
+  //  component: Paginate
   // }
   ]
 }));
@@ -38797,30 +38829,33 @@ var render = function() {
           }),
           0
         )
-      ])
-    ]),
-    _vm._v(" "),
-    _vm._m(0)
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { attrs: { id: "wrapper-oldnew" } }, [
-      _c("div", { staticClass: "oldnew" }, [
-        _c("div", { staticClass: "wrapper-oldnew-prev" }, [
-          _c("div", { attrs: { id: "oldnew-prev" } })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "wrapper-oldnew-next" }, [
-          _c("div", { attrs: { id: "oldnew-next" } })
-        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "buttons" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-gray",
+            staticStyle: {
+              padding: "20px",
+              "border-radius": "10px",
+              "margin-top": "50px",
+              "margin-left": "50%"
+            },
+            attrs: { type: "button" },
+            on: {
+              click: function($event) {
+                _vm.morePosts += 8
+              }
+            }
+          },
+          [_vm._v("More")]
+        )
       ])
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 

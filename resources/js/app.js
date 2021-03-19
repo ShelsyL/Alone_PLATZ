@@ -24,7 +24,7 @@ window.Vue = require('vue').default;
 // Vue.component('posts', require('./components/Posts.vue').default);
 
 Vue.component('menu-categories', require('./components/Menu.vue').default);
-
+// Vue.component('pagination', require('laravel-vue-pagination'));
 
 /**
 * Next, we will create a fresh Vue application instance and attach it to

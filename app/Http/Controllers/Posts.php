@@ -13,8 +13,10 @@ class Posts extends Controller {
     return response()->json(Post::with('categorie')->get()); // Retourne tous les Posts (Résultat) avec les catégories sous forme d'une réponse Json.
   }
 
-// A faire ...
-//  - Le Store
-//  ...
-//  Dans les Notes
+
+  // public function index () {
+  //   $posts = Post::orderBy('created_at', 'desc')
+  //                  -> paginate(4);
+  //   return response()->json($posts); // Retourne tous les Posts (Résultat) avec les catégories sous forme d'une réponse Json.
+  // }
 }
