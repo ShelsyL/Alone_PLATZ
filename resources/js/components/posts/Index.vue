@@ -79,7 +79,7 @@
 export default {
   data(){
     return {
-      morePosts: 4
+      morePosts: 20
     }
   },
 

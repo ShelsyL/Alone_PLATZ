@@ -9,6 +9,7 @@ class Comment extends Model
 {
     use HasFactory;
     protected $table = 'comments';
+    protected $fillable = ['pseudo', 'content', 'post_id'];
 
     /**
      * GETTER du user à qui appartient ce post.

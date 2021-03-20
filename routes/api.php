@@ -35,3 +35,8 @@ use App\Http\Controllers\Categories;
 Route::resource('categories', Categories::class, [
   'except' => ['show', 'create', 'edit']
 ]);
+
+use App\Http\Controllers\Comments;
+Route::resource('comments', Comments::class, [
+  'except' => ['show', 'create', 'edit']
+]);

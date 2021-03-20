@@ -3,7 +3,8 @@
 let state = {
   // posts initilisé à Null
   posts: [],
-  categories: []
+  categories: [],
+  comments: []
 }
 
 export default state

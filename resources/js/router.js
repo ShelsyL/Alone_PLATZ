@@ -27,7 +27,7 @@ export default new Router({
      path: '/posts/categories/:id',
      name: 'categories.show',
      component: PostsIndex
-   }
+    }
     // {
     //  path: '/posts/paginate',
     //  name: 'paginate.show',

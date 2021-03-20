@@ -42,5 +42,6 @@ const app = new Vue({
     // On lance le Setter (pour mettre qq chose dans post) pour les posts
     this.$store.dispatch('setPosts');
     this.$store.dispatch('setCategories');
+    this.$store.dispatch('setComments');
   }
 });

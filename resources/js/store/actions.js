@@ -11,12 +11,22 @@ let actions = {
     axios.get('api/categories')
          .then(reponsePHP => (commit ('SET_CATEGORIES', reponsePHP.data)));
   },
-
-
   setCategories ({commit}) {
     axios.get('api/categories')
          .then(reponsePHP => (commit ('SET_CATEGORIES', reponsePHP.data)));
 
+  },
+  setComments({commit}) {
+    axios.get('api/comments')
+         .then(reponsePHP => (commit('SET_COMMENTS', reponsePHP.data)));
+  },
+  createComment({commit}, comment) {
+    // https://laravel.com/docs/8.x/controllers#basic-controllers
+    axios.post('api/comments', comment)
+         .then(reponsePHP => (commit('CREATE_COMMENT', reponsePHP.data)))
+         .catch(err => {
+            console.log(err)
+         })
   }
 }
 

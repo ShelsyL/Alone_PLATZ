@@ -97,23 +97,39 @@
               <hr/>
               <h2>Your comments</h2>
             </div>
-
-
           </div>
 
-          <div class="post-reply">
+          <div class="post-reply" v-for="comment in comments" :key="comment.id">
+              <div class="name-reply-post">{{ comment.pseudo }}</div>
+              <div class="text-reply-post">{{ comment.content }}</div>
+          </div>
+
+          <!-- <div class="post-reply">
             <div class="image-reply-post"></div>
             <div class="name-reply-post">Igor vlademir</div>
             <div class="text-reply-post">Awesome mockup, i like it very much ! It will help me for my website i was looking for since few days. Thank you a lot.</div>
-          </div>
-
-          <div class="post-reply-2">
-            <div class="image-reply-post-2"></div>
-            <div class="name-reply-post-2">Nathan Shaw</div>
-            <div class="text-reply-post-2">Well done ! I like the way you did it. Awesome ! </div>
-          </div>
+          </div> -->
 
           <div class="post-send">
+            <div id="main-post-send">
+              <div id="title-post-send">Add your comment</div>
+
+              <form id="contact" method="post" @submit.prevent="createComment(newComment)">
+                <input id="pseudo_input" type="text" name="pseudo" placeholder="Votre Pseudo" v-model="newComment.pseudo">
+                <fieldset>
+                  <p> <textarea id="message" name="message" maxlength="500" placeholder="Votre Message" tabindex="5" cols="30" rows="4" v-model="newComment.content"></textarea>  </p>
+                </fieldset>
+                <div style="text-align:center;">
+                  <input type="submit" name="envoi" value="Envoyer" />
+                </div>
+                <input type="hidden" v-model="newComment.post_id = post.id" name="postId">
+              </form>
+
+            </div>
+          </div>
+          </div>
+
+          <!-- <div class="post-send">
             <div id="main-post-send">
               <div id="title-post-send">Add your comment</div>
               <form id="contact" method="post" action="/onclickprod/formsubmit_op.asp">
@@ -128,7 +144,7 @@
               </form>
             </div>
           </div>
-        </div>
+        </div> -->
 
 
    </div>
@@ -143,14 +159,32 @@
 
 export default {
   data () {
-    return {};
+    return {
+      newComment: {
+          pseudo: '',
+          content: '',
+          post_id: ''
+        }
+    };
   },
+  methods: {
+      // Envoi du nouveau comment
+      createComment(comment) {
+        this.$store.dispatch('createComment', comment)
+        this.newComment = { pseudo: '', content: '', ressource_id: null }
+      }
+    },
   computed: {
     post () {
       let id = this.$route.params.id;
       return this.$store.getters.getPostById(id);
     },
-  },
+    comments () {
+      let id = this.$route.params.id;
+      let cmts = this.$store.getters.getCommentsByPostId(id);
+      return cmts;
+    }
+  }
 };
 </script>
 
